@@ -8,6 +8,7 @@ namespace MultiplayerTesting
         [Header("References")]
         [SerializeField] private LobbyNetworkManager manager = null;
         [SerializeField] private TMP_InputField addressInput = null;
+        [SerializeField] private TextMeshProUGUI addressField = null;
         [SerializeField] private GameObject joinButton = null, hostButton = null, joinBackButton = null, hostBackButton = null, goButton = null;
 
         public void Join()
@@ -25,6 +26,8 @@ namespace MultiplayerTesting
             hostButton.SetActive(false);
             hostBackButton.SetActive(true);
             manager.StartHost();
+            addressField.gameObject.SetActive(true);
+            addressField.text = $"Hosting on: {manager.networkAddress}";
         }
 
         public void JoinBack()
@@ -43,6 +46,7 @@ namespace MultiplayerTesting
             hostButton.SetActive(true);
             hostBackButton.SetActive(false);
             manager.StopHost();
+            addressField.gameObject.SetActive(false);
         }
 
         public void Go()
