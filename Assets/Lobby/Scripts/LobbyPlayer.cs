@@ -1,18 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Mirror;
 using UnityEngine;
 
-public class LobbyPlayer : MonoBehaviour
+namespace MultiplayerTesting
 {
-    // Start is called before the first frame update
-    void Start()
+    public class LobbyPlayer : NetworkBehaviour
     {
-        
-    }
+        [Header("Attributes")]
+        [SerializeField] private float speed = 10;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("References")]
+        [SerializeField] private Rigidbody2D rb = null;
+
+        private void FixedUpdate()
+        {
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+            if (isLocalPlayer) rb.velocity = new Vector2(x, y) * speed * Time.deltaTime;
+        }
     }
 }
