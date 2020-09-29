@@ -1,4 +1,7 @@
-﻿using TMPro;
+﻿using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using TMPro;
 using UnityEngine;
 
 namespace MultiplayerTesting
@@ -9,7 +12,7 @@ namespace MultiplayerTesting
         [SerializeField] private LobbyNetworkManager manager = null;
         [SerializeField] private TMP_InputField addressInput = null;
         [SerializeField] private TextMeshProUGUI addressField = null;
-        [SerializeField] private GameObject joinButton = null, hostButton = null, joinBackButton = null, hostBackButton = null, goButton = null;
+        [SerializeField] private GameObject joinButton = null, hostButton = null, joinBackButton = null, hostStopButton = null, goButton = null;
 
         public void Join()
         {
@@ -24,10 +27,10 @@ namespace MultiplayerTesting
         {
             joinButton.SetActive(false);
             hostButton.SetActive(false);
-            hostBackButton.SetActive(true);
+            hostStopButton.SetActive(true);
             manager.StartHost();
             addressField.gameObject.SetActive(true);
-            addressField.text = $"Hosting on: {manager.networkAddress}";
+            addressField.text = $"Hosting on: {GetLocalIP()}";
         }
 
         public void JoinBack()
@@ -44,7 +47,7 @@ namespace MultiplayerTesting
         {
             joinButton.SetActive(true);
             hostButton.SetActive(true);
-            hostBackButton.SetActive(false);
+            hostStopButton.SetActive(false);
             manager.StopHost();
             addressField.gameObject.SetActive(false);
         }
@@ -57,6 +60,21 @@ namespace MultiplayerTesting
             goButton.SetActive(false);
             manager.networkAddress = address;
             manager.StartClient();
+        }
+
+        private string GetLocalIP()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            return "error (IP not found)";
+
+            // return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
         }
     }
 }
