@@ -1,14 +1,28 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 namespace MultiplayerTesting
 {
     public class LobbyNetworkManagerHUD : MonoBehaviour
     {
-        [SerializeField] private LobbyNetworkManager lobbyNetworkManager = null;
+        [Header("References")]
+        [SerializeField] private LobbyNetworkManager manager = null;
+        [SerializeField] private TMP_InputField addressInput = null;
 
-        public void ()
+        public void StartHost()
         {
-            
+            manager.StartHost();
+        }
+
+        public void StartClient()
+        {
+            manager.networkAddress = addressInput.text;
+            manager.StartClient();
+        }
+
+        public void StopClient()
+        {
+            manager.StopClient();
         }
     }
 }
