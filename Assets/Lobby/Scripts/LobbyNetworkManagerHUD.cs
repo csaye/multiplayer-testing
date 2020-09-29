@@ -24,7 +24,7 @@ namespace MultiplayerTesting
             joinButton.SetActive(false);
             hostButton.SetActive(false);
             hostBackButton.SetActive(true);
-            // manager.StartHost();
+            manager.StartHost();
         }
 
         public void JoinBack()
@@ -34,7 +34,7 @@ namespace MultiplayerTesting
             addressInput.gameObject.SetActive(false);
             joinBackButton.SetActive(false);
             goButton.SetActive(false);
-            // manager.StopClient();
+            manager.StopClient();
         }
 
         public void HostBack()
@@ -42,7 +42,7 @@ namespace MultiplayerTesting
             joinButton.SetActive(true);
             hostButton.SetActive(true);
             hostBackButton.SetActive(false);
-            // manager.StopHost();
+            manager.StopHost();
         }
 
         public void Go()
@@ -51,8 +51,8 @@ namespace MultiplayerTesting
             if (string.IsNullOrWhiteSpace(address)) return;
             addressInput.gameObject.SetActive(false);
             goButton.SetActive(false);
-            // manager.networkAddress = address;
-            // manager.StartClient();
+            manager.networkAddress = address;
+            manager.StartClient();
         }
     }
 }
