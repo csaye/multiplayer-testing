@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Mirror;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using TMPro;
@@ -9,7 +10,7 @@ namespace MultiplayerTesting
     public class LobbyNetworkManagerHUD : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private LobbyNetworkManager manager = null;
+        [SerializeField] private NetworkManager manager = null;
         [SerializeField] private TMP_InputField addressInput = null;
         [SerializeField] private TextMeshProUGUI addressField = null;
         [SerializeField] private GameObject joinButton = null, hostButton = null, joinBackButton = null, hostStopButton = null, goButton = null;
