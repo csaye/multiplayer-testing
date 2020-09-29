@@ -1,18 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RocketmanPlayer : MonoBehaviour
+namespace MultiplayerTesting
 {
-    // Start is called before the first frame update
-    void Start()
+    public class RocketmanPlayer : MonoBehaviour
     {
-        
-    }
+        [Header("Attributes")]
+        [SerializeField] private float forceY = 300;
+        [SerializeField] private float forceXRange = 30;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("References")]
+        [SerializeField] private Rigidbody2D rb = null;
+
+        private void Update()
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(GetJumpForce());
+            }
+        }
+
+        private Vector2 GetJumpForce()
+        {
+            float forceX = Random.Range(-forceXRange, forceXRange);
+            return new Vector2(forceX, forceY);
+        }
     }
 }
