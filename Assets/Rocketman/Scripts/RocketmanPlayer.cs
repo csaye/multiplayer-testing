@@ -12,24 +12,24 @@ namespace MultiplayerTesting
         [Header("References")]
         [SerializeField] private Rigidbody2D rb = null;
 
-        private PlayerManager playerManager;
+        private static bool gameStarted = false;
 
-        private int playerNumber;
+        private int playerNumber = -1;
 
-        public void Initialize(PlayerManager _playerManager, int _playerNumber)
+        public void Initialize(int _playerNumber)
         {
-            playerManager = _playerManager;
+            Debug.Log("initializing player " + _playerNumber);
             playerNumber = _playerNumber;
         }
 
         private void Update()
         {
             if (!isLocalPlayer) return;
-            if (playerManager == null) return;
+            // if (playerManager == null) return;
 
-            if (Input.GetButtonDown("Jump") && playerManager.gameStarted) rb.AddForce(GetJumpForce());
-            if (transform.position.y > 20) playerManager.PlayerWon(playerNumber);
-            if (Input.GetKeyDown("return") && playerNumber == 0) playerManager.gameStarted = true;
+            if (Input.GetButtonDown("Jump") && gameStarted) rb.AddForce(GetJumpForce());
+            // if (transform.position.y > 20) playerManager.PlayerWon(playerNumber);
+            if (Input.GetKeyDown("return") && playerNumber == 0) gameStarted = true;
         }
 
         private Vector2 GetJumpForce()

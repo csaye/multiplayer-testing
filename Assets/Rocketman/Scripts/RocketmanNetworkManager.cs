@@ -9,14 +9,11 @@ namespace MultiplayerTesting
         [SerializeField] private Color[] playerColors = null;
         [SerializeField] private Vector2[] playerPositions = null;
 
-        [Header("References")]
-        [SerializeField] private PlayerManager playerManager = null;
-
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             GameObject player = Instantiate(playerPrefab, playerPositions[numPlayers], Quaternion.identity);
             // player.GetComponent<SpriteRenderer>().color = playerColors[numPlayers];
-            player.GetComponent<RocketmanPlayer>().Initialize(playerManager, numPlayers);
+            player.GetComponent<RocketmanPlayer>().Initialize(numPlayers);
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 

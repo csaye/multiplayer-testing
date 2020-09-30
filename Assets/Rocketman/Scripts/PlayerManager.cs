@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using Mirror;
+using TMPro;
 using UnityEngine;
 
 namespace MultiplayerTesting
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : NetworkBehaviour
     {
         [Header("References")]
         [SerializeField] private TextMeshProUGUI winText = null;
