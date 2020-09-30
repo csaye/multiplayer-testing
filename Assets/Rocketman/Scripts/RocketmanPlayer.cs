@@ -12,8 +12,7 @@ namespace MultiplayerTesting
         [Header("References")]
         [SerializeField] private Rigidbody2D rb = null;
 
-        [SyncVar]
-        private bool gameStarted = false;
+        private static bool gameStarted = false;
 
         private void Update()
         {
@@ -32,6 +31,9 @@ namespace MultiplayerTesting
         }
 
         [Command]
-        private void CmdStartGame() => gameStarted = true;
+        private void CmdStartGame() => RpcStartGame();
+
+        [ClientRpc]
+        private void RpcStartGame() => gameStarted = true;
     }
 }

@@ -6,7 +6,7 @@ namespace MultiplayerTesting
     public class RocketmanNetworkManager : NetworkManager
     {
         [Header("Attributes")]
-        [SerializeField] private Color[] playerColors = null;
+        // [SerializeField] private Color[] playerColors = null;
         [SerializeField] private Vector2[] playerPositions = null;
 
         public override void OnServerAddPlayer(NetworkConnection conn)
