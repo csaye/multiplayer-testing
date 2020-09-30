@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af175829f0504f789d9a230326fba54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   forceY: 300
   forceXRange: 30
   rb: {fileID: -2279667181720143915}

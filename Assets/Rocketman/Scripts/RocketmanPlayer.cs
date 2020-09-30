@@ -24,6 +24,7 @@ namespace MultiplayerTesting
 
         private void Update()
         {
+            if (!isLocalPlayer) return;
             if (playerManager == null) return;
 
             if (Input.GetButtonDown("Jump") && playerManager.gameStarted) rb.AddForce(GetJumpForce());

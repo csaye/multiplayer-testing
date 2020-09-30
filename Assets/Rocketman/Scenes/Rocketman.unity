@@ -532,7 +532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winText: {fileID: 1869710420}
-  gameStarted: 0
 --- !u!1 &593616359
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ namespace MultiplayerTesting
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             GameObject player = Instantiate(playerPrefab, playerPositions[numPlayers], Quaternion.identity);
-            player.GetComponent<SpriteRenderer>().color = playerColors[numPlayers];
+            // player.GetComponent<SpriteRenderer>().color = playerColors[numPlayers];
             player.GetComponent<RocketmanPlayer>().Initialize(playerManager, numPlayers);
             NetworkServer.AddPlayerForConnection(conn, player);
         }
