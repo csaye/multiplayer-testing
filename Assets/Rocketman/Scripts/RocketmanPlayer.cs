@@ -22,7 +22,7 @@ namespace MultiplayerTesting
 
             if (Input.GetButtonDown("Jump") && gameStarted) rb.AddForce(GetJumpForce());
             // if (transform.position.y > 20) playerManager.PlayerWon(playerNumber);
-            if (Input.GetKeyDown("return") && isServer) gameStarted = true;
+            if (Input.GetKeyDown("return")) CmdStartGame();
         }
 
         private Vector2 GetJumpForce()
@@ -30,5 +30,8 @@ namespace MultiplayerTesting
             float forceX = Random.Range(-forceXRange, forceXRange);
             return new Vector2(forceX, forceY);
         }
+
+        [Command]
+        private void CmdStartGame() => gameStarted = true;
     }
 }
