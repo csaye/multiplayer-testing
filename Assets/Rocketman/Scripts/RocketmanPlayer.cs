@@ -15,16 +15,15 @@ namespace MultiplayerTesting
 
         private static bool gameStarted = false;
 
-        private int playerNumber = -1;
-
-        public void Initialize(int num) => playerNumber = num;
+        [SyncVar]
+        public int playerNum = -1;
 
         private void Update()
         {
             if (!isLocalPlayer) return;
 
             if (Input.GetButtonDown("Jump") && gameStarted) rb.AddForce(GetJumpForce());
-            if (transform.position.y > 20 && gameStarted) CmdEndGame(playerNumber);
+            if (transform.position.y > 20 && gameStarted) CmdEndGame(playerNum);
             if (Input.GetKeyDown("return")) CmdStartGame();
         }
 
