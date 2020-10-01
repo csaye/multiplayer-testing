@@ -13,7 +13,7 @@ namespace MultiplayerTesting
         {
             GameObject player = Instantiate(playerPrefab, playerPositions[numPlayers], Quaternion.identity);
             // player.GetComponent<SpriteRenderer>().color = playerColors[numPlayers];
-            // player.GetComponent<RocketmanPlayer>().Initialize(numPlayers);
+            player.GetComponent<RocketmanPlayer>().Initialize(numPlayers);
             NetworkServer.AddPlayerForConnection(conn, player);
         }
 

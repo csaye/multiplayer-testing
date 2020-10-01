@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 1869710420}
   m_Layer: 5
   m_Name: WinText
-  m_TagString: Untagged
+  m_TagString: WinText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using TMPro;
 using UnityEngine;
 
 namespace MultiplayerTesting
@@ -14,13 +15,16 @@ namespace MultiplayerTesting
 
         private static bool gameStarted = false;
 
+        private int playerNumber = -1;
+
+        public void Initialize(int num) => playerNumber = num;
+
         private void Update()
         {
             if (!isLocalPlayer) return;
-            // if (playerManager == null) return;
 
             if (Input.GetButtonDown("Jump") && gameStarted) rb.AddForce(GetJumpForce());
-            // if (transform.position.y > 20) playerManager.PlayerWon(playerNumber);
+            if (transform.position.y > 20) CmdEndGame(playerNumber);
             if (Input.GetKeyDown("return")) CmdStartGame();
         }
 
@@ -31,9 +35,16 @@ namespace MultiplayerTesting
         }
 
         [Command]
-        private void CmdStartGame() => RpcStartGame();
+        private void CmdStartGame() => RpcSetGameStarted(true);
+
+        [Command]
+        private void CmdEndGame(int winner)
+        {
+            RpcSetGameStarted(false);
+            GameObject.FindWithTag("WinText").GetComponent<TextMeshProUGUI>().text = $"Player {winner} won";
+        }
 
         [ClientRpc]
-        private void RpcStartGame() => gameStarted = true;
+        private void RpcSetGameStarted(bool b) => gameStarted = b;
     }
 }
