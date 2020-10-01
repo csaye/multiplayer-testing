@@ -24,7 +24,7 @@ namespace MultiplayerTesting
             if (!isLocalPlayer) return;
 
             if (Input.GetButtonDown("Jump") && gameStarted) rb.AddForce(GetJumpForce());
-            if (transform.position.y > 20) CmdEndGame(playerNumber);
+            if (transform.position.y > 20 && gameStarted) CmdEndGame(playerNumber);
             if (Input.GetKeyDown("return")) CmdStartGame();
         }
 
@@ -35,16 +35,23 @@ namespace MultiplayerTesting
         }
 
         [Command]
-        private void CmdStartGame() => RpcSetGameStarted(true);
+        private void CmdStartGame() => RpcStartGame();
 
         [Command]
-        private void CmdEndGame(int winner)
+        private void CmdEndGame(int winner) => RpcEndGame(winner);
+
+        [ClientRpc]
+        private void RpcStartGame()
         {
-            RpcSetGameStarted(false);
-            GameObject.FindWithTag("WinText").GetComponent<TextMeshProUGUI>().text = $"Player {winner} won";
+            GameObject.Find("UI/Canvas/WinText").GetComponent<TextMeshProUGUI>().text = "Game started";
+            gameStarted = true;
         }
 
         [ClientRpc]
-        private void RpcSetGameStarted(bool b) => gameStarted = b;
+        private void RpcEndGame(int winner)
+        {
+            GameObject.Find("UI/Canvas/WinText").GetComponent<TextMeshProUGUI>().text = $"Player {winner} won";
+            gameStarted = false;
+        }
     }
 }
